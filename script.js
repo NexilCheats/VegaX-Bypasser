@@ -7,6 +7,7 @@ document.getElementById('login-btn').addEventListener('click', login);
 document.getElementById('signup-btn').addEventListener('click', openSignup);
 document.getElementById('submit-signup').addEventListener('click', signup);
 document.getElementById('back-to-login').addEventListener('click', backToLogin);
+document.getElementById('logout-btn').addEventListener('click', logout);
 document.getElementById('vega-download').addEventListener('click', () => {
     window.open("https://pastebin.com/raw/P3Gb4fxR"); // Your download link
 });
@@ -19,7 +20,7 @@ function isValidUsername(username) {
     // Regular expression to check for special characters or spaces
     const specialCharsRegex = /[^a-zA-Z0-9]/; 
     // Array of bad words (customize as needed)
-    const badWords = ["nigger", "bitch", "pussy"]; 
+    const badWords = ["nigger", "nigga", "bitch"]; 
 
     // Check for spaces or special characters
     if (username.trim() === "" || username.includes(" ") || specialCharsRegex.test(username)) {
@@ -114,11 +115,27 @@ function login() {
 
     if (userDatabase[username] && userDatabase[username].password === password) {
         alert("Login successful!");
+        localStorage.setItem('loggedInUser', username); // Store the logged-in username
         document.getElementById('form-container').style.display = 'none';
         document.getElementById('main-app').style.display = 'block';
+        updateMainAppUI(username); // Update UI with user-specific info
     } else {
         alert("Invalid username or password!");
     }
+}
+
+// Function to update the main app UI with user-specific information
+function updateMainAppUI(username) {
+    document.getElementById('welcome-message').innerText = `Welcome, ${username}!`;
+    document.getElementById('logout-btn').style.display = 'block'; // Show logout button
+}
+
+// Logout function
+function logout() {
+    localStorage.removeItem('loggedInUser'); // Remove logged-in user from localStorage
+    document.getElementById('main-app').style.display = 'none';
+    document.getElementById('form-container').style.display = 'block'; // Show the login form again
+    alert("You have been logged out.");
 }
 
 // Populate the login form with existing user data if available
@@ -130,6 +147,12 @@ window.onload = () => {
         // Auto-fill the username and password if available
         savedUsername.value = localStorage.getItem('lastUsername') || '';
         savedPassword.value = localStorage.getItem('lastPassword') || '';
+    }
+
+    // Check if the user is already logged in
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (loggedInUser) {
+        updateMainAppUI(loggedInUser); // Update UI for the logged-in user
     }
 
     // Add event listener to save last used username and password
