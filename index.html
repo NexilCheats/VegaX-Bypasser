@@ -4,33 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VegaX Bypass</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS -->
 </head>
 <body>
-    <div class="container">
-        <h1>VegaX Bypass</h1>
-        <div id="form-container">
-            <h2>Login</h2>
-            <input type="text" id="username" placeholder="Username">
-            <input type="password" id="password" placeholder="Password">
-            <button id="login-btn">Login</button>
-            <button id="signup-btn">Sign Up</button>
-        </div>
-        <div id="signup-container" style="display:none;">
-            <h2>Sign Up</h2>
-            <input type="email" id="email" placeholder="Email">
-            <input type="text" id="signup-username" placeholder="Username">
-            <input type="password" id="signup-password" placeholder="Password">
-            <input type="password" id="confirm-password" placeholder="Confirm Password">
-            <button id="submit-signup">Sign Up</button>
-            <button id="back-to-login">Back to Login</button>
-        </div>
-        <div id="main-app" style="display:none;">
-            <h2>Main Application</h2>
-            <button id="vega-download">VegaX Download</button>
-            <button id="option-key">Key</button>
-        </div>
+    <div id="form-container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button id="login-btn">Login</button>
+        <button id="signup-btn">Sign Up</button>
     </div>
+
+    <div id="signup-container" style="display: none;">
+        <h2>Sign Up</h2>
+        <input type="text" id="email" placeholder="Email">
+        <input type="text" id="signup-username" placeholder="Username">
+        <input type="password" id="signup-password" placeholder="Password">
+        <input type="password" id="confirm-password" placeholder="Confirm Password">
+        <button id="submit-signup">Sign Up</button>
+        <button id="back-to-login">Back to Login</button>
+    </div>
+
+    <div id="main-app" style="display: none;">
+        <h2 id="welcome-message"></h2>
+        <button id="vega-download">VegaX Download</button>
+        <button id="option-key">Key</button>
+        <button id="logout-btn" style="display: none;">Logout</button>
+    </div>
+
+    <script src="script.js"></script> <!-- Link to your JS -->
 </body>
 </html>
