@@ -6,8 +6,8 @@
     <title>VegaX Bypass</title>
     <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS -->
 </head>
-<body>
-    <div id="form-container">
+<body class="light"> <!-- Default to light mode -->
+    <div id="form-container" class="light">
         <h2>Login</h2>
         <input type="text" id="username" placeholder="Username">
         <input type="password" id="password" placeholder="Password">
@@ -30,6 +30,11 @@
         <button id="vega-download">VegaX Download</button>
         <button id="option-key">Key</button>
         <button id="logout-btn" class="hidden">Logout</button>
+    </div>
+
+    <!-- Dark mode toggle button -->
+    <div style="text-align:center; margin-top:20px;">
+        <button id="dark-mode-toggle">Toggle Dark Mode</button>
     </div>
 
     <script src="script.js"></script> <!-- Link to your JS -->
