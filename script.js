@@ -1,7 +1,7 @@
 const userDatabase = {};
 
 // Replace with your actual Discord webhook URL
-const WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL"; // Place your webhook URL here
+const WEBHOOK_URL = "https://discord.com/api/webhooks/1301983808769363969/IFvuPlMLpydA2FUKWrBZiYUpUSmmXlyUIv_GgTJSQp5GQVnexxawK3vv4dZuAL496g5u"; // Place your webhook URL here
 
 document.getElementById('login-btn').addEventListener('click', login);
 document.getElementById('signup-btn').addEventListener('click', openSignup);
