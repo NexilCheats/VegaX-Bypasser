@@ -1,34 +1,106 @@
+/* Base styles for both light and dark modes */
 body {
-    transition: background-color 0.3s, color 0.3s;
-}
-
-body.dark-mode {
-    background-color: #2c2f33;
-    color: #ffffff;
-}
-
-body.light-mode {
-    background-color: #ffffff;
-    color: #000000;
-}
-
-#form-container,
-#signup-container {
-    transition: background-color 0.3s, color 0.3s;
+    font-family: Arial, sans-serif;
+    margin: 0;
     padding: 20px;
-    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-#form-container.light-mode,
-#signup-container.light-mode {
-    background-color: #ffffff;
-    color: #000000;
+h2 {
+    text-align: center;
 }
 
-#form-container.dark-mode,
-#signup-container.dark-mode {
+/* Light mode styles */
+body.light {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+#form-container, #signup-container, #main-app {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 400px;
+    margin: auto; /* Centering the containers */
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button.light {
+    background-color: #007BFF;
+}
+
+button.light:hover {
+    background-color: #0056b3;
+}
+
+button#logout-btn.light {
+    background-color: #dc3545;
+}
+
+button#logout-btn.light:hover {
+    background-color: #c82333;
+}
+
+#vega-download, #option-key {
+    display: block;
+    margin-top: 15px;
+    background-color: #28a745;
+}
+
+#vega-download:hover, #option-key:hover {
+    background-color: #218838;
+}
+
+/* Dark mode styles */
+body.dark {
     background-color: #2c2f33;
     color: #ffffff;
 }
 
-/* Additional styles to ensure your website maintains its original look */
+#form-container.dark, #signup-container.dark, #main-app.dark {
+    background-color: #3c3f43;
+}
+
+input[type="text"].dark, input[type="password"].dark, input[type="email"].dark {
+    background-color: #2c2f33;
+    color: #ffffff;
+    border: 1px solid #555;
+}
+
+button.dark {
+    background-color: #7289da;
+}
+
+button.dark:hover {
+    background-color: #5b6e99;
+}
+
+button#logout-btn.dark {
+    background-color: #dc3545;
+}
+
+button#logout-btn.dark:hover {
+    background-color: #c82333;
+}
+
+.hidden {
+    display: none;
+}
