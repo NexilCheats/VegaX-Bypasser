@@ -162,4 +162,29 @@ window.onload = () => {
     savedPassword.addEventListener('input', () => {
         localStorage.setItem('lastPassword', savedPassword.value);
     });
-}
+
+    // Dark mode toggle functionality
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    darkModeToggle.addEventListener('click', function() {
+        const body = document.body;
+        const formContainer = document.getElementById('form-container');
+        const signupContainer = document.getElementById('signup-container');
+        const mainApp = document.getElementById('main-app');
+
+        // Toggle the dark class on body and form elements
+        body.classList.toggle("dark");
+        formContainer.classList.toggle("dark");
+        signupContainer.classList.toggle("dark");
+        mainApp.classList.toggle("dark");
+
+        // Toggle button text
+        if (body.classList.contains("dark")) {
+            this.textContent = "Toggle Light Mode";
+        } else {
+            this.textContent = "Toggle Dark Mode";
+        }
+
+        // Toggle button style
+        this.classList.toggle("dark");
+    });
+};
