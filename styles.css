@@ -1,19 +1,13 @@
-/* Base styles for both light and dark modes */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
     margin: 0;
     padding: 20px;
-    transition: background-color 0.3s, color 0.3s;
 }
 
 h2 {
     text-align: center;
-}
-
-/* Light mode styles */
-body.light {
-    background-color: #f4f4f4;
-    color: #333;
 }
 
 #form-container, #signup-container, #main-app {
@@ -36,6 +30,7 @@ input[type="text"], input[type="password"], input[type="email"] {
 button {
     width: 100%;
     padding: 10px;
+    background-color: #007BFF;
     border: none;
     border-radius: 5px;
     color: #fff;
@@ -43,19 +38,15 @@ button {
     margin-top: 10px;
 }
 
-button.light {
-    background-color: #007BFF;
-}
-
-button.light:hover {
+button:hover {
     background-color: #0056b3;
 }
 
-button#logout-btn.light {
+#logout-btn {
     background-color: #dc3545;
 }
 
-button#logout-btn.light:hover {
+#logout-btn:hover {
     background-color: #c82333;
 }
 
@@ -67,38 +58,6 @@ button#logout-btn.light:hover {
 
 #vega-download:hover, #option-key:hover {
     background-color: #218838;
-}
-
-/* Dark mode styles */
-body.dark {
-    background-color: #2c2f33;
-    color: #ffffff;
-}
-
-#form-container.dark, #signup-container.dark, #main-app.dark {
-    background-color: #3c3f43;
-}
-
-input[type="text"].dark, input[type="password"].dark, input[type="email"].dark {
-    background-color: #2c2f33;
-    color: #ffffff;
-    border: 1px solid #555;
-}
-
-button.dark {
-    background-color: #7289da;
-}
-
-button.dark:hover {
-    background-color: #5b6e99;
-}
-
-button#logout-btn.dark {
-    background-color: #dc3545;
-}
-
-button#logout-btn.dark:hover {
-    background-color: #c82333;
 }
 
 .hidden {
