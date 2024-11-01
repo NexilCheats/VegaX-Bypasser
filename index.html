@@ -30,6 +30,12 @@
         <button id="vega-download">VegaX Download</button>
         <button id="option-key">Key</button>
         <button id="logout-btn" class="hidden">Logout</button>
+
+        <!-- Admin Controls Section: Only visible to 'admin' -->
+        <div id="admin-controls" style="display: none;">
+            <h3>Admin Controls</h3>
+            <button onclick="banUser()">Ban User</button>
+        </div>
     </div>
 
     <script src="script.js"></script> <!-- Link to your JS -->
