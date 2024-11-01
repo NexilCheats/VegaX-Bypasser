@@ -11,6 +11,30 @@ document.getElementById('option-key').addEventListener('click', () => {
     window.open("https://pastebin.com/raw/GFi72wpN"); // Your key link
 });
 
+// Function to check if a username is valid
+function isValidUsername(username) {
+    // Regular expression to check for special characters or spaces
+    const specialCharsRegex = /[^a-zA-Z0-9]/; 
+    // Array of bad words (customize as needed)
+    const badWords = ["badword1", "badword2", "badword3"]; 
+
+    // Check for spaces or special characters
+    if (username.trim() === "" || username.includes(" ") || specialCharsRegex.test(username)) {
+        alert("Username cannot contain spaces or special characters!");
+        return false;
+    }
+
+    // Check for bad words
+    for (const word of badWords) {
+        if (username.toLowerCase().includes(word)) {
+            alert(`Username cannot contain the word "${word}"!`);
+            return false;
+        }
+    }
+
+    return true;
+}
+
 function openSignup() {
     document.getElementById('form-container').style.display = 'none';
     document.getElementById('signup-container').style.display = 'block';
@@ -27,16 +51,24 @@ function signup() {
     const password = document.getElementById('signup-password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
 
+    // Check if username is valid
+    if (!isValidUsername(username)) {
+        return;
+    }
+
+    // Check if the username already exists
     if (userDatabase[username]) {
         alert("Username already exists!");
         return;
     }
 
+    // Validate password confirmation
     if (password !== confirmPassword) {
         alert("Passwords do not match!");
         return;
     }
 
+    // Save user data
     userDatabase[username] = { email, password };
     alert("Signup successful! You can now log in.");
     backToLogin();
