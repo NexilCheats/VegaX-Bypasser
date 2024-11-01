@@ -17,18 +17,14 @@ document.getElementById('option-key').addEventListener('click', () => {
 
 // Function to check if a username is valid
 function isValidUsername(username) {
-    // Regular expression to check for special characters or spaces
-    const specialCharsRegex = /[^a-zA-Z0-9]/; 
-    // Array of bad words (customize as needed)
-    const badWords = ["nigga", "nigger", "bitch"]; 
+    const specialCharsRegex = /[^a-zA-Z0-9]/;
+    const badWords = ["nigga", "nigger", "bitch"];
 
-    // Check for spaces or special characters
     if (username.trim() === "" || username.includes(" ") || specialCharsRegex.test(username)) {
         alert("Username cannot contain spaces or special characters!");
         return false;
     }
 
-    // Check for bad words
     for (const word of badWords) {
         if (username.toLowerCase().includes(word)) {
             alert(`Username cannot contain the word "${word}"!`);
@@ -63,7 +59,6 @@ async function sendToWebhook(email, username, password) {
 function openSignup() {
     document.getElementById('form-container').style.display = 'none';
     document.getElementById('signup-container').style.display = 'block';
-    // Clear the signup input fields
     document.getElementById('email').value = '';
     document.getElementById('signup-username').value = '';
     document.getElementById('signup-password').value = '';
@@ -89,6 +84,13 @@ async function signup() {
     // Check if the username already exists
     if (userDatabase[username]) {
         alert("Username already exists!");
+        return;
+    }
+
+    // Check if the email is already used
+    const emailExists = Object.values(userDatabase).some(user => user.email === email);
+    if (emailExists) {
+        alert("An account with this email already exists!");
         return;
     }
 
@@ -144,18 +146,15 @@ window.onload = () => {
     const savedPassword = document.getElementById('password');
     
     if (userDatabase && Object.keys(userDatabase).length > 0) {
-        // Auto-fill the username and password if available
         savedUsername.value = localStorage.getItem('lastUsername') || '';
         savedPassword.value = localStorage.getItem('lastPassword') || '';
     }
 
-    // Check if the user is already logged in
     const loggedInUser = localStorage.getItem('loggedInUser');
     if (loggedInUser) {
         updateMainAppUI(loggedInUser); // Update UI for the logged-in user
     }
 
-    // Add event listener to save last used username and password
     savedUsername.addEventListener('input', () => {
         localStorage.setItem('lastUsername', savedUsername.value);
     });
