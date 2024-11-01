@@ -171,11 +171,18 @@ window.onload = () => {
         const signupContainer = document.getElementById('signup-container');
         const mainApp = document.getElementById('main-app');
 
-        // Toggle the dark class on body and form elements
+        // Toggle the dark class on body and other elements
         body.classList.toggle("dark");
-        formContainer.classList.toggle("dark");
-        signupContainer.classList.toggle("dark");
         mainApp.classList.toggle("dark");
+
+        // Toggle login and signup forms to opposite mode
+        if (body.classList.contains("dark")) {
+            formContainer.classList.remove("dark");
+            signupContainer.classList.remove("dark");
+        } else {
+            formContainer.classList.add("dark");
+            signupContainer.classList.add("dark");
+        }
 
         // Toggle button text
         if (body.classList.contains("dark")) {
